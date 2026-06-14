@@ -8,24 +8,103 @@ Redirecting...
 </body>
 </html> -->
 
-{
-  "name": "GHDataHub",
-  "short_name": "GHDataHub",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
-  "description": "Fast & Reliable Data Services",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GHDataHub</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #000, #222);
+      color: white;
+      text-align: center;
     }
-  ]
-}
+
+    .container {
+      padding: 50px 20px;
+    }
+
+    h1 {
+      color: gold;
+    }
+
+    .btn {
+      display: block;
+      margin: 15px auto;
+      padding: 15px;
+      width: 80%;
+      max-width: 300px;
+      background: gold;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    #installBtn {
+      display: none; /* hidden until browser allows install */
+      background: #ffffff;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>GHDataHub</h1>
+    <p>Fast & Reliable Data Services</p>
+
+    <!-- Install Button -->
+    <button id="installBtn" class="btn">📲 Add to Home Screen</button>
+
+    <!-- Provider Link -->
+    <a class="btn" href="https://www.grandtechub.cloud/store/GhDataHub" target="_blank">
+      Buy Data Now
+    </a>
+
+    <!-- WhatsApp Channel -->
+    <a class="btn whatsapp" href="https://whatsapp.com/channel/0029Vb7yv2b0rGiUA7KMyV1b" target="_blank">
+      Join WhatsApp Channel
+    </a>
+
+    <!-- Chat -->
+    <a class="btn" href="https://wa.me/233249234986" target="_blank">
+      Chat on WhatsApp
+    </a>
+  </div>
+
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById("installBtn");
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = "block";
+
+      installBtn.addEventListener("click", () => {
+        installBtn.style.display = "none";
+        deferredPrompt.prompt();
+
+        deferredPrompt.userChoice.then((choiceResult) => {
+          deferredPrompt = null;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
